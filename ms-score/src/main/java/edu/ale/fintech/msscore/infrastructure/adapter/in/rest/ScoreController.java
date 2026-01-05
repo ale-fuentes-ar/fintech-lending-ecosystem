@@ -1,4 +1,4 @@
-package edu.ale.fintech.msscore.infrastructura.adapter.in.rest;
+package edu.ale.fintech.msscore.infrastructure.adapter.in.rest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.ale.fintech.msscore.application.port.in.GetScoreUseCase;
-import edu.ale.fintech.msscore.infrastructura.adapter.in.rest.dto.ScoreResponse;
+import edu.ale.fintech.msscore.infrastructure.adapter.in.rest.dto.ScoreResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController

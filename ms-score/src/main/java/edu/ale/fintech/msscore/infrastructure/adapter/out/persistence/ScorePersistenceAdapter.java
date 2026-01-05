@@ -1,4 +1,4 @@
-package edu.ale.fintech.msscore.infrastructura.adapter.out.persistence;
+package edu.ale.fintech.msscore.infrastructure.adapter.out.persistence;
 
 import java.util.Optional;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import edu.ale.fintech.msscore.application.port.out.ScoreRepositoryPort;
 import edu.ale.fintech.msscore.domain.model.Score;
-import edu.ale.fintech.msscore.infrastructura.adapter.out.ScoreEntity;
+import edu.ale.fintech.msscore.infrastructure.adapter.out.ScoreEntity;
 import lombok.RequiredArgsConstructor;
 
 @Component

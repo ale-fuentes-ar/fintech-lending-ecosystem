@@ -1,4 +1,4 @@
-package edu.ale.fintech.msscore.infrastructura.adapter.in.rest.dto;
+package edu.ale.fintech.msscore.infrastructure.adapter.in.rest.dto;
 
 import java.time.LocalDateTime;
 

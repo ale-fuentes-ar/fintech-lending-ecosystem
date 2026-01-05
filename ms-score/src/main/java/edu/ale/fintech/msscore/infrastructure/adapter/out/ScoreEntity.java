@@ -1,4 +1,4 @@
-package edu.ale.fintech.msscore.infrastructura.adapter.out;
+package edu.ale.fintech.msscore.infrastructure.adapter.out;
 
 import jakarta.persistence.*;
 import lombok.Getter;
