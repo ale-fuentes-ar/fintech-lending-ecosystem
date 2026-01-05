@@ -2,7 +2,6 @@ package edu.ale.fintech.msscore.infrastructure.adapter.out.persistence;
 
 import org.springframework.stereotype.Component;
 
-import edu.ale.fintech.msscore.domain.model.RiskLevel;
 import edu.ale.fintech.msscore.domain.model.Score;
 import edu.ale.fintech.msscore.infrastructure.adapter.out.ScoreEntity;
 
@@ -18,7 +17,7 @@ public class ScoreMapper {
                 .id(entity.getId())
                 .customerId(entity.getCustomerId())
                 .creditScore(entity.getCreditScore())
-                .riskLevel(RiskLevel.valueOf(entity.getRiskLevel()))
+                .riskLevel(entity.getRiskLevel())
                 .lastUpdated(entity.getLastUpdate())
                 .build();
 
@@ -33,8 +32,8 @@ public class ScoreMapper {
         entity.setId(score.getId());
         entity.setCustomerId(score.getCustomerId());
         entity.setCreditScore(score.getCreditScore());
-        entity.setRiskLevel(score.getRiskLevel().name());
+        entity.setRiskLevel(score.getRiskLevel());
         entity.setLastUpdate(score.getLastUpdated());
         return entity;
-    }   
+    }
 }

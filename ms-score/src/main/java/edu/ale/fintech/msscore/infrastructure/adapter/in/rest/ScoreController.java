@@ -11,7 +11,7 @@ import edu.ale.fintech.msscore.infrastructure.adapter.in.rest.dto.ScoreResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/ve/scores")
+@RequestMapping("/api/v1/scores")
 @RequiredArgsConstructor
 public class ScoreController {
 
