@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MsScoreApplication<ms-score>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "edu.ale.fintech.msscore.MsScoreApplication",
+            "projectName": "ms-score",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
