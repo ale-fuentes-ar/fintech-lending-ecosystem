@@ -9,12 +9,33 @@ services:
     ports:
       - "1433:1433"
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'rooT123!' -Q 'SELECT 1' || exit 1"]
+      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'rooT123!' -Q 'SELECT 1' || exit 1" ]
       interval: 10s
       timeout: 3s
       retries: 10
     volumes:
       - mssql-data:/var/opt/mssql
+
+  ms-score:
+    build: ./ms-score
+    container_name: ms-score
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sqlserver:1433;databaseName=master;encrypt=true;trustServerCertificate=true
+    depends_on:
+      - sqlserver
+
+  ms-client:
+    build: ./ms-client
+    container_name: ms-client
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sqlserver:1433;databaseName=master;encrypt=true;trustServerCertificate=true
+      - SERVICES_MS-SCORE_URL=http://ms-score:8081
+    depends_on:
+      - ms-score
 
 volumes:
   mssql-data:
