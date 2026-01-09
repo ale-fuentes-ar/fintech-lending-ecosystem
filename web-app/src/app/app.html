@@ -1,0 +1,80 @@
+<main class="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 font-sans">
+
+  <!-- Contenedor Principal -->
+  <div class="max-w-md w-full">
+
+    <!-- Título -->
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Fintech<span
+          class="text-indigo-600">Connect</span></h1>
+      <p class="text-slate-500 mt-2">Sistema de Evaluación de Crédito Sincrónico</p>
+    </div>
+
+    <!-- Card de Búsqueda -->
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8">
+      <div class="space-y-4">
+        <label class="block text-sm font-medium text-slate-700 uppercase tracking-wider">Identificación del Cliente
+          (DNI)</label>
+        <div class="flex space-x-2">
+          <input type="text" [(ngModel)]="dniInput" placeholder="Ingrese DNI (ej: 12345)"
+            class="block w-full px-4 py-3 rounded-xl border-slate-200 border bg-slate-50 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" />
+          <button (click)="searchClient()" [disabled]="loading()"
+            class="bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-200">
+            {{ loading() ? '...' : 'Buscar' }}
+          </button>
+
+          @if (errorMessage()) {
+          <div
+            class="mt-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm text-center font-medium border border-red-200 animate-bounce">
+            {{ errorMessage() }}
+          </div>
+          }
+
+        </div>
+      </div>
+
+      <!-- Resultados con Control de Flujo @if de Angular 18+ -->
+      @if (client()) {
+      <div
+        class="mt-10 pt-8 border-t border-slate-100 space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800">{{ client()?.fullName }}</h2>
+          <p class="text-slate-400 text-sm">DNI: {{ client()?.dni }}</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-indigo-50 p-4 rounded-2xl">
+            <span class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Ingresos Declarados</span>
+            <p class="text-xl font-bold text-indigo-700 mt-1">${{ client()?.income | number }}</p>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-2xl">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Credit Score</span>
+            <p class="text-xl font-bold text-slate-700 mt-1">{{ client()?.creditScore || 'N/A' }}</p>
+          </div>
+        </div>
+
+        <!-- Badge de Riesgo -->
+        <div class="py-4 rounded-2xl text-center text-sm font-black uppercase tracking-widest border-2" [ngClass]="{
+              'bg-emerald-50 text-emerald-600 border-emerald-100': client()?.riskLevel === 'LOW',
+              'bg-amber-50 text-amber-600 border-amber-100': client()?.riskLevel === 'MEDIUM',
+              'bg-rose-50 text-rose-600 border-rose-100': client()?.riskLevel === 'HIGH'
+            }">
+          Calificación: {{ client()?.riskLevel || 'Sin Datos' }}
+        </div>
+      </div>
+      } @else if (!loading() && dniInput() !== '' && client() === null) {
+      <div class="mt-8 p-4 bg-rose-50 text-rose-600 rounded-xl text-center text-sm font-medium border border-rose-100">
+        No se encontró información para este cliente.
+      </div>
+      }
+    </div>
+
+    <!-- Footer Técnico  -->
+    <div class="mt-8 flex justify-center space-x-4">
+      <span class="px-3 py-1 bg-slate-200 text-slate-600 rounded-full text-[10px] font-bold uppercase">Java 21</span>
+      <span class="px-3 py-1 bg-slate-200 text-slate-600 rounded-full text-[10px] font-bold uppercase">WebClient</span>
+      <span class="px-3 py-1 bg-slate-200 text-slate-600 rounded-full text-[10px] font-bold uppercase">Angular
+        Signals</span>
+    </div>
+  </div>
+</main>

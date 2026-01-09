@@ -26,6 +26,7 @@
 
     <modules>
         <module>ms-score</module>
+        <module>ms-client</module>
     </modules>
 
     <dependencyManagement>

@@ -1,0 +1,1 @@
+INSERT INTO clients (dni, full_name, income) VALUES ('12345', 'Alejandro Fuentes', 5000.00);

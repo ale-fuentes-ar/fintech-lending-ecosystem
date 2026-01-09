@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   # application
@@ -10,10 +10,11 @@ spring:
     formatted-version: ☕︎ Version 1.0 - to building 
     author: ᝰ🖋 Alejandro Fuentes | github ale-fuentes-ar
 
-  # VM configuration
+# VM configuration
   threads:
     virtual:
       enabled: true
+
 
 # datasource
   datasource:
@@ -25,12 +26,34 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    defer-datasource-initialization: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServerDialect
+  slq:
+    init:
+      mode: always
+
+# Configuración personalizada para llamar al MS-Score
+services:
+  ms-score:
+    url: "http://localhost:8081"
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      scoreService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowType: COUNT_BASED
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
 
 springdoc:
-  api-docs:
-    path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
